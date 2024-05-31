@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<h1>Questions list</h1>
+<table border=1>
+	<tr>
+		<th>Content</th>
+		<th>Points</th>
+		<th>Answer type</th>
+		<th>Difficulty level</th>
+		<th>Delete?</th>
+	</tr>
+        {% for question in questions %}
+        	<tr>
+        		<td>{{question.content}}</td>
+        		<td>{{question.points}}</td>
+        		<td>{{question.answer_type}}</td>
+        		<td>{{question.difficulty_lvl}}</td>
+        		<td><a href='./delete_question_{{question.id}}'>Delete</a></td>
+        		
+        	</tr>
+        {% endfor %}
+</table>
+    <br/><br/>
+   Go back <a href=./>home</a>

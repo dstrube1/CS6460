@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+</head>
+<body>
+
+
+    <div id="container">
+
+        <div id="users">
+            {% for user in users %}
+                  <div class="user-container {% if user.id == player_id %} active {% endif %}">
+                        <div class="user-name"><p>{{ user.name }}</p></div>
+                        {% if user.id == player_id %}
+                        <div class="user-gems"><img class="gem-picture" src="{{ url_for('static',filename='images/gem.png') }}" alt="Gem">{{ gem_dict.get(user.id, 0) }} </div>
+                        {% endif %}
+                        <div class="profile-picture"><img class="gem-picture" src="{{ url_for('static', filename='images/profile.png') }}" alt="{{ user.name }}'s Profile Picture"></div>
+
+                  </div>
+            {% endfor %}
+        </div>
+
+        <div id="game-container">
+            <div id="events">
+                <div id="current">
+`
+                    <div id="cards">
+                        <img class="cards-picture" src="{{ url_for('static',filename='images/cards.png') }}" alt="Cards"> x{{ num_questions }}
+                        <p>Round: {{ current_round }} / {{ max_rounds }}</p>
+                        <p id="countdown"></p>
+                    </div>
+                    <div id="current_question">
+                            {%  if current_event.event_type != "game_over" %}
+                                 <form action="/submit_answer" method="POST">
+                                    <input type="hidden" name="game_event_id" value="{{ current_event.id }}">
+
+                                     <h2 class="question-text">
+                                        {%  if current_event.event_type in ["vote", "question"] %}
+
+                                            {% if player_already_answered and not user_game_session_manager.user_in_camp(player_id, current_event.round_id)%}
+                                                Waiting on others to answer...
+
+                                            {% elif current_event.event_type == "question" %}
+                                                <span class="gems">
+                                                    <img class="gem-picture" src="{{ url_for('static',filename='images/gem.png') }}" alt="Gem"> {{ current_event.question.points }}
+                                                </span>
+                                                {{ current_event.question.content }}
+                                            {% elif current_event.event_type == "vote" and not user_game_session_manager.user_in_camp(player_id, current_event.round_id)%}
+                                                {{ current_event.question.content }}
+                                            {% else %}
+                                                Waiting for explorers to vote...
+                                            {% endif %}
+
+                                         {% endif %}
+                                     </h2>
+
+                                    <div id="answer-container">
+                                        {% for answer in current_event.question.answers %}
+                                            <!--The answers and SUBMIT option should be visible to people in the dungeon only-->
+                                            {% if not player_already_answered and current_event.event_type == "question" %}
+                                                <label class="answer">
+                                                    <input type="radio" name="answer_id" value="{{ answer.id }}" required>
+                                                    {{ answer.content }}
+                                                </label>
+                                            {% endif %}
+
+                                            {% if not player_already_answered and current_event.event_type == "vote" and not user_game_session_manager.user_in_camp(player_id, current_event.round_id) %}
+                                                <label class="answer">
+                                                    <input type="radio" name="answer_id" value="{{ answer.id }}" required>
+                                                    {{ answer.content }}
+                                                </label>
+                                            {% endif %}
+
+                                        {% endfor %}
+                                        {% if current_event.event_type in ["question", "vote"] and not user_game_session_manager.user_in_camp(player_id, current_event.round_id) and not player_already_answered%}
+                                            <input type="submit" value="Submit answer">
+                                        {% endif %}
+                                    </div>
+
+                                {%  if current_event.event_type == "danger" %}
+                                     <img class="danger-picture" src="{{ url_for('static', filename="images/danger/{}.png".format(current_event.event_data)) }}" alt="Danger card">
+                                    <input type="hidden" name="answer_id" value="{{ current_event.question.answers[0].id }}" required>
+
+                                     {% if player_already_answered and not user_game_session_manager.user_in_camp(player_id, current_event.round_id)%}
+                                        Waiting on others to pass the danger...
+                                     {% elif not user_game_session_manager.user_in_camp(player_id, current_event.round_id) %}
+                                        <input type="submit" value="Continue">
+                                     {% endif %}
+                                {% endif %}
+
+                                {%  if current_event.event_type == "round_over" %}
+                                     {% if player_already_answered %}
+                                        Waiting on others to continue...
+                                     {% else %}
+                                        <h2 class="question-text">The round is over.</h2>
+                                        <input type="hidden" name="answer_id" value="{{ current_event.question.answers[0].id }}" required>
+                                        <input type="submit" value="Continue">
+                                     {% endif %}
+                                {% endif %}
+
+                            {%  else %}
+                                 <h2 class="question-text">The game is over.</h2>
+                            {% endif %}
+                        </form>
+
+                    </div>
+                </div>
+                <div id="info">
+                    <h2>Users in dungeon</h2>
+                    {% for user in users %}
+                        {% if not user_game_session_manager.user_in_camp(user.id, current_event.round_id) and current_event.event_type != "round_over" %}
+                            <div class="user-container {% if user.id == player_id %} active {% endif %}">
+                                <div class="profile-picture"><img class="gem-picture" src="{{ url_for('static', filename='images/profile.png') }}" alt="{{ user.name }}'s Profile Picture"></div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+                <div id="history">
+                     <h2>Journey so far</h2>
+                    {% for event in history %}
+                        {%  if event.event_type in ["question", "danger"] and not event.event_skipped %}
+                            <div class="event">
+                                {%  if event.event_type == "question" %}
+                                    <span class="gems">
+                                        <img class="gem-picture" src="{{ url_for('static',filename='images/gem.png') }}" alt="Gem"> {{ event.question.points }}
+                                    </span>
+                                    <h2 class="question-text">
+                                        {{ event.question.content }}
+                                    </h2>
+                                    <div id="answer-container">
+                                        Your answer: {{ user_answer_dict.get(event.question.id, "N/A").content }} {% if not user_answer_dict.get(event.question.id).is_correct %} &#10060; {% else %} &#9989; {% endif %}
+                                    </div>
+                                {%  endif %}
+                                {%  if event.event_type == "danger" %}
+                                    <img class="danger-picture" src="{{ url_for('static', filename="images/danger/{}.png".format(event.event_data)) }}" alt="Danger card">
+                                {% endif %}
+                            </div>
+                        {%  endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div id="campfire">
+                <img class="campsite-picture" src="{{ url_for('static', filename='images/campsite.png') }}" alt="Campsite">
+                {% for user in users %}
+                    {% if user_game_session_manager.user_in_camp(user.id, current_event.round_id) or current_event.event_type == "round_over" %}
+                        <div class="user-container {% if user.id == player_id %} active {% endif %}">
+                        <div class="profile-picture"><img class="gem-picture" src="{{ url_for('static', filename='images/profile.png') }}" alt="{{ user.name }}'s Profile Picture"></div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+       UserId: {{player_id}} Game Code: {{game_code}} Go back <a href="./">home</a>
+    </div>
+    <script>
+        {% if current_event.event_type in ["vote", "question"] %}
+        var timeleft = 30;
+        var timer = setInterval(function(){
+          if(timeleft <= 0){
+            clearInterval(timer);
+            document.getElementById("countdown").innerHTML = "00:00";
+          } else {
+              if (timeleft < 10){
+                  document.getElementById("countdown").style.color = "red";
+              }
+            document.getElementById("countdown").innerHTML = "00:" + ('' + timeleft).padStart(2, "0");
+          }
+          timeleft -= 1;
+        }, 1000);
+        {% endif %}
+
+        setInterval(myCallback, 1000);
+        function httpGet(theUrl) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+            xmlHttp.send( null );
+            return JSON.parse(xmlHttp.responseText);
+        }
+        function myCallback() {
+            result = httpGet("/should_refresh_{{ current_event.session_id }}_{{ current_event.event_order }}_{{ current_event.round_id }}_{{ users|length }}")["refresh"]
+            if (result){
+                window.location.reload();
+            }
+        }
+    </script>
+</body>
+</html>   

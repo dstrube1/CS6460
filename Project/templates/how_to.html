@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How to Play</title>
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            max-width: 700px;
+            margin:auto;
+        }
+
+       .collapsible {
+          background-color: #007BFF;
+          color: white;
+          cursor: pointer;
+          padding: 18px;
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: 15px;
+        }
+
+        .content {
+          padding: 0 18px;
+          display: none;
+          overflow: hidden;
+          background-color: #f1f1f1;
+        }
+
+        img {
+            border: solid 1px black;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-top: 5px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <button type="button" class="collapsible">What is this?</button>
+    <div class="content">
+        <p> Our project is an adaptation of the Diamant/Incan Gold boardgame. In this game, you will explore a perilous dungeon to collect the most amount of gems!
+        During the exploration, you will have to answer a series of questions, avoid various dangers and compete with other explorers!</p>
+        <img src="{{ url_for('static',filename='images/main_game_start_screen.png') }}" style="width:100%; height:100%">
+    </div>
+        <button type="button" class="collapsible">How to make a game?</button>
+    <div class="content">
+        <p> 1. To make a game, click on the Make Game button on the homepage </p>
+        <img src="{{ url_for('static',filename='images/homepage_make_game.png') }}">
+        <p> 2. Then specify how many rounds a game should consist of and which quiz should the game use. Then press Create Game button </p>
+        <img src="{{ url_for('static',filename='images/make_game_window.png') }}">
+        <p> 3. Now a new game should be created with a unique participation code. Copy the code as you and others will need it to join a game </p>
+        <img src="{{ url_for('static',filename='images/game_code.png') }}">
+        <p> 4. Click on the "join" link, and you will be redirected to the join window. Likewise, you can get here from the homepage by clicking the Join Game button.
+        Once you have entered the code, press the Submit button</p>
+        <img src="{{ url_for('static',filename='images/join_game.png') }}">
+        <p>5. Congratulations, you have created and join your first game! You should now see the main game window. Your profile should be colored green on the right side.</p>
+        <img src="{{ url_for('static',filename='images/main_game_start_screen.png') }}" style="width:100%; height:100%">
+    </div>
+    <button type="button" class="collapsible">How to join a game?</button>
+    <div class="content">
+        <p>You will need a game participation code. This should be shared with you by the person who made the game. Once you have the code, go to the homepage
+        and click on the Join Game button. </p>
+        <img src="{{ url_for('static',filename='images/homepage_make_game.png') }}">
+        <p>This will redirect you to a new page in which you will be able to provide the participation code.</p>
+        <img src="{{ url_for('static',filename='images/join_game.png') }}">
+    </div>
+    <button type="button" class="collapsible">Exploring the dungeon</button>
+    <div class="content">
+        <p>In your journey you will encounter questions. Each question has a reward (green gem icon above). Complete a question without getting sent back to the camp,
+        and you will be eligible to collect gems for that question when you decide to leave the dungeon! </p>
+        <img src="{{ url_for('static',filename='images/question.png') }}">
+    </div>
+    <button type="button" class="collapsible">Leaving the dungeon</button>
+    <div class="content">
+        <p>Answering a question, does not automatically award you with gems. After each encounter you will be asked whether you want to stay or leave the dungeon.</p>
+        <img src="{{ url_for('static',filename='images/voting.png') }}">
+        <p>If you decide to stay, you have the chance to find more treasure, but also greater risk of encountering danger! If you decide to leave, then your journey for
+        that specific round is over BUT you get to collect the gems you found along the way! This is especially important, as any gems that you loot on your way out
+        of the dungeon, will be <b>removed from the round</b>. This means that the explorers that stayed in the dungeon will not be able to get gems for already <b>looted</b>
+        questions.</p>
+    </div>
+    <button type="button" class="collapsible">How do I get to camp?</button>
+    <div class="content">
+        <p>Once you vote to leave you will be sent back to the camp. From here you will be able to see the other questions the remaining participants are still
+        answering, but you yourself will not be able to submit any answers. Likewise, if you encounter 2 identical danger cards <b>OR</b> answered 1 question wrongly
+        and encountered 1 danger card, you will also be sent to the camp and wil have to wait for the next round.</p>
+        <img src="{{ url_for('static',filename='images/campsite_main_game.png') }}">
+    </div>
+    <button type="button" class="collapsible">What if multiple people decide to leave at the same time?</button>
+    <div class="content">
+        <p>The gems get divided evenly among all the explorers that decided to leave. If gems cannot be divided evenly, the remaining gems are lost.</p>
+    </div>
+    <button type="button" class="collapsible">There's danger in the dungeon?</button>
+    <div class="content">
+        <p>Yes! Apart from questions, during your exploration you might encounter various dangers such as bats, snakes or mummies. Encounter one of them and you'll be fine,
+        but the moment the second twin appears, everyone in the dungeon will be sent back to the camp and will <b>get no gems for that round</b> regardless of how many
+        questions were answered!</p>
+        <img src="{{ url_for('static',filename='images/danger_card.png') }}">
+    </div>
+        <button type="button" class="collapsible">When is the game over?</button>
+    <div class="content">
+        <p>The game ends when all the rounds are over. You can see how many questions a round has (excluding danger cards) and what round you are currently on by looking in the
+            top right corner of the dungeon.</p>
+        <img src="{{ url_for('static',filename='images/info_corner.png') }}">
+        <p>Once the game is over everyone will be redirected to the scoreboard page, where you will be able to see how many points everyone got.</p>
+        <img src="{{ url_for('static',filename='images/scoreboard.png') }}">
+    </div>
+
+    <p>Go back <a href=./>home</a></p>
+
+    <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+<head>
+    <title>Join Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        form {
+            margin: 0 auto;
+            max-width: 300px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Join Game</h1>
+    <form method="post">
+        <label for="game_code">Game code:</label>
+        <input type="text" id="game_code" name="game_code" required>
+        <br><br>
+        <input type="hidden" name="user_id" value="1">
+        <input type="hidden" name="attempts_remaining" value="10">
+        <input type="hidden" name="danger_card_count" value="10">
+        <button type="submit">Submit</button>
+    </form>
+    <br><br>
+    Go back <a href="./">home</a>
+</body>
+</html>
+

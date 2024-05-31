@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Make Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 5px;
+            width: 200px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Make Game</h1>
+    <form method="post">
+
+        <br/><br/>
+        Max Rounds: <input type="number" name="max_rounds" value="3"/>
+        <br/><br/>
+        Available quizzes:
+        <table>
+        {% for quiz in quizzes %}
+            <tr>
+                <td><input type="radio" id="make_game_with_quiz_id_{{quiz.id}}" name="make_game_with_quiz_id" value="{{quiz.id}}" onchange="quizSelected('{{quiz.id}}')"></td>
+                <td>{{quiz.name}}</td>
+                <td><a href="./new_question_and_answers_{{quiz.id}}">+ Q&As</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+        <script>
+            var selectedQuizId = null;
+
+            function quizSelected(quiz_id) {
+                selectedQuizId = quiz_id;
+                fetch('/make_game', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({quiz_id: quiz_id})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var tablediv = document.getElementById('tablediv');
+                    tablediv.innerHTML = "<table border=1>"; 
+                    const keys = Object.keys(data.response_data);
+                    keys.forEach(function(key) {
+                        tablediv.innerHTML += "<tr><td>" + data.response_data[key] + "<br></td></tr>";
+                    });
+                    tablediv.innerHTML += "</table>";
+                });
+            }
+
+            function deleteQuiz() {
+                if (selectedQuizId) {
+                    window.location.href = './delete_quiz_' + selectedQuizId;
+                } else {
+                    alert('No quiz selected');
+                }
+            }
+
+        </script>
+        <br/><br/>
+        Questions in quiz:
+        <div id="tablediv">
+        </div>
+        <br/><br/>
+        <button type="submit">Create game</button>
+    </form>
+
+    <button type="submit" onclick="window.location.href='./new_quiz';">Create new quiz</button>
+    <button type="submit" onclick="deleteQuiz()">Delete selected quiz</button>
+
+    <br/><br/>
+    Go back <a href=./>home</a>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+ideas: 
+0- What is the reasoning behind not showing student correct answers after exams (prevent cheating), is this a valid reason (is there another, equally effective way)? 
+If this is an educational institution, does this way of preventing cheating outweigh the benefit of students learning from their mistakes?
+
+1- Formative assessment of teaching material
+First, Is this an educational institution or a certification institution?
+
+after every 10-30 minutes, prompt student for feedback on what they've been exposed to not saying what they've learned because, despite the teacher's intention or action, the student may not have learned anything, specifically if the teaching material is not of good quality; student can respond to questionnaire and/or in a video recorded on youtube (unlisted) or something else
+
+If educational, how much should teachers care about feedback from students?
+
+What are some of the best ways for teachers to get feedback from students?
+
+Should students individually contact teachers via email or phone or in person and let them know what they think, and is this scalable, is this something teachers would want to be a part of,
+or should there be a system of student feedback that is anonymous and collects rating data?
+
+How badly should a section of a lesson be rated before a teacher would consider revising their material?
+
+How long should lessons and quizzes with errors and typos stay online before being replaced?
+
+Is there (or should there be) a system to respond to the 1 star reviews of courses on OMSCentral?
+
+student will be given prompts like:
+how would you rate the quality of recent videos:
+Great
+Good
+Okay
+Bad
+Terrible
+
+If multiple videos over the time:
+Which video was best:
+Which was worst:
+
+What made it the best:
+Graphics
+Music
+Production quality
+Material presented in easy-to-understand and easy-to-retain form
+Material was concise
+Material was entertaining
+Other: 
+
+What made it the worst:
+Video quality
+Audio quality
+Material presented in dense unclear form
+Material was too repetitive
+Material was self-contradictory
+Material was factually incorrect
+Material was outdated
+Other: 
+
+2- some content to improve finns education

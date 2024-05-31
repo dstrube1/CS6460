@@ -1,0 +1,59 @@
+learning goals: what you should know after learning
+learning outcome: what you should be able to do after learning
+
+Constructivism: from Jean Piadget: how people learn about the world around them
+Constructionism: from Seymour Papper: constructivism applied to how to develop curricula or activities; can't pour knowledge into a learner's head- they have to actively construct an understanding of what's being taught: project based learning, problem based learning, learning by design, learning by example, learning by doing
+
+Metacognition: thinking about what you're thinking; knowing what you know; self-regulated learning
+
+tsquare?
+
+CSCW: computer supported collaborative work; eg: Google Docs
+
+Udacity R&R: reading and reflection
+
+===
+One idea that I've had is a tool for students to give feedback on the qualtiy of the teaching material they're exposed to. The purpose of this tool would be for 1- educators to learn what teaching styles and materials are not just more effective but more  enjoyable to students, and 2- administrators who want to know which educators are doing a good job and which ones could be improved. This idea was inspired by comparing the quality of some excellent lessons by Prof Joyner to those of other profs (specifically ones teaching "Machine Learning" and "Machine Learning for Trading") that were not as high quality. I've already got a few example lessons in mind that students (ie test subjects) could be shown and some example questions they could be given to grade the example lessons. If there is a trend in the responses from the test subjects (as I believe there would be), then this could quantitatively illustrate to educators and adminstrators how their educational content could be vastly improved.
+
+I sincerely feel this could be a very useful and valuable resource for educators, administrators, and students alike.
+===
+Team:
+Rudolfs Praulins - rpraulins3@gatech.edu
+Sophia M Nguyen - snguyen45@gatech.edu
+===
+
+Here is my summary of the overall body of work I’ve put together. The high-level trends, large takeaways, or open questions I’ve found are . To summarize the domain of X, . 
+
+===
+
+research has also recognized the multifaceted nature of educational games and researchers have suggested paying attention to the types of games, the domain subjects of the games, and the grade levels of the learners (Vandercruysse et al. 2013). Therefore, it is important to systematically explore the variances of the effect sizes of competition in DGBL, as they may shed light on external validity and generalization of the effects of competition in DGBL.
+Vandercruysse, S., Vandewaetere, M., Cornillie, F., & Clarebout, G. (2013). Competition and students’ perceptions in a game-based language learning environment. Educational Technology Research and Development, 61(6), 927–950. https://doi.org/10.1007/s11423-013-9314-5.
+
+we hypothesize that competition in games may yield different outcomes for different grade levels.
+(Chen, Shih, & Law, 2020)
+
+The domain of social science may be highly ill-structured compared to math, language learning, and science (especially in formal education). Nevertheless, the effectiveness of competition in ill-structured domains should be further investigated in the future. The results of this study inform practice that competition in DGBL may work effectively in well-structured domains like math, language learning, and science. However, it remains unclear how it may work in ill-structured domains such as social science.
+
+https://bera-journals.onlinelibrary.wiley.com/doi/epdf/10.1111/bjet.12303?saml_referrer
+
+https://www.sciencedirect.com/science/article/pii/S0360131514002061
+
+===
+
+Status report #2 (Week 9):
+What progress has been made in the past week?
+1- pulled latest changes to the project on github from Rudolf, confirmed his README instructions for creating and populating the database 
+2- added new data to the database and attempted to get it to show in the web interface
+
+What challenges have been encountered in the past week?
+After adding new data to the database, encountered a problem where the data would not show. 
+
+Do you have any new expectations that your final project will differ from what was described in your proposal?
+Not at this time.
+
+===
+on make game page, list quizzes and add buttons to do all the other stuff
+
+db:
+question round is now game event
+

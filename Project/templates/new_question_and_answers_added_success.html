@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question successfully added!</title>
+</head>
+<body>
+    <h1>Question added successfully! Here are the question details: </h1>
+    <p>Question: {{ question.content }}</p>
+    <p>Gems rewarded for question: {{ question.points }}</p>
+    <p>Accepted answer types: {{ question.answer_type }}</p>
+    <p>Question difficulty: {{ question.difficulty_lvl }}</p>
+    <p>Parent Quiz Id: {{ question.quiz_id }}</p>
+    <!-- List the answers that were added -->
+    <p>Answers: </p>
+    {% for answer in answers %}
+        <p>Answer: {{ answer.content }}</p>
+        <p>Correct: {{ answer.is_correct }}</p>
+    {% endfor %}
+        <br>
+
+      <button onclick="window.location.href='./';">
+          Back home
+      </button>
+</body>
+</html>
