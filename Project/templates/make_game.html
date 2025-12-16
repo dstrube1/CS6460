@@ -69,10 +69,38 @@
         a:hover {
             color: #0056b3;
         }
+
+        .collapsible {
+          background-color: #4e7ca9;
+          color: white;
+          cursor: pointer;
+          padding: 18px;
+          border: none;
+          text-align: center;
+          outline: none;
+          font-size: 15px;
+        }
+
+        .content {
+          padding: 0 18px;
+          display: none;
+          overflow: hidden;
+          background-color: #f1f1f1;
+        }
     </style>
 </head>
 <body>
     <h1>Make Game</h1>
+
+    <button type="button" class="collapsible">Demo notice</button>
+    <div class="content">
+        <p style="max-width: 700px; margin:auto;"> This is the DEMO or prototype build of the game, the purpose of which is to provide an idea of how
+            the core gameplay loop would feel. It functions by simply having a pool of quizzes to choose from. To prevent the pool from being filled
+            with many test quizzes from all the potential testers, we chose to simply provide a predefined list of quizzes that can be used to create
+            a game. If you wish to see the quiz creation windows as well, please have a look at our project
+            on <a href="https://github.com/dstrube1/CS6460/tree/main/Project" target="_blank">GitHub</a>.</p>
+    </div>
+
     <form method="post">
 
         <br/><br/>
@@ -84,7 +112,6 @@
             <tr>
                 <td><input type="radio" id="make_game_with_quiz_id_{{quiz.id}}" name="make_game_with_quiz_id" value="{{quiz.id}}" onchange="quizSelected('{{quiz.id}}')"></td>
                 <td>{{quiz.name}}</td>
-                <td><a href="./new_question_and_answers_{{quiz.id}}">+ Q&As</a></td>
             </tr>
         {% endfor %}
         </table>
@@ -103,7 +130,7 @@
                 .then(response => response.json())
                 .then(data => {
                     var tablediv = document.getElementById('tablediv');
-                    tablediv.innerHTML = "<table border=1>"; 
+                    tablediv.innerHTML = "<table border=1>";
                     const keys = Object.keys(data.response_data);
                     keys.forEach(function(key) {
                         tablediv.innerHTML += "<tr><td>" + data.response_data[key] + "<br></td></tr>";
@@ -129,11 +156,26 @@
         <button type="submit">Create game</button>
     </form>
 
-    <button type="submit" onclick="window.location.href='./new_quiz';">Create new quiz</button>
-    <button type="submit" onclick="deleteQuiz()">Delete selected quiz</button>
+    <!--<button type="submit" onclick="window.location.href='./new_quiz';">Create new quiz</button>
+    <button type="submit" onclick="deleteQuiz()">Delete selected quiz</button>-->
+<br/><br/>
+Go back <a href=./>home</a>
 
-    <br/><br/>
-    Go back <a href=./>home</a>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
 
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 </body>
 </html>
