@@ -97,7 +97,7 @@ question_seven = QuestionManager.create_question(
             quiz_id=new_quiz.id
         )
 
-AnswerManager.create_answer(content="6", is_correct=True, question_id=question_seven.id)
+AnswerManager.create_answer(content="10", is_correct=True, question_id=question_seven.id)
 AnswerManager.create_answer(content="5", is_correct=False, question_id=question_seven.id)
 AnswerManager.create_answer(content="4", is_correct=False, question_id=question_seven.id)
 AnswerManager.create_answer(content="7", is_correct=False, question_id=question_seven.id)
@@ -216,8 +216,10 @@ question_three = QuestionManager.create_question(
             quiz_id=new_quiz.id
         )
 
+# Usually Mercury, but sometimes Mars:
+# https://www.livescience.com/space/planets/which-planet-is-closest-to-earth-hint-theres-more-than-1-right-answer
 AnswerManager.create_answer(content="Mercury", is_correct=True, question_id=question_three.id)
-AnswerManager.create_answer(content="Mars", is_correct=False, question_id=question_three.id)
+AnswerManager.create_answer(content="Mars", is_correct=True, question_id=question_three.id)
 AnswerManager.create_answer(content="Jupiter", is_correct=False, question_id=question_three.id)
 AnswerManager.create_answer(content="Uranus", is_correct=False, question_id=question_three.id)
 
@@ -322,7 +324,7 @@ question_eleven = QuestionManager.create_question(
 AnswerManager.create_answer(content="Siberia", is_correct=False, question_id=question_eleven.id)
 AnswerManager.create_answer(content="Antarctica", is_correct=True, question_id=question_eleven.id)
 AnswerManager.create_answer(content="Iceland", is_correct=False, question_id=question_eleven.id)
-AnswerManager.create_answer(content="Ehypt", is_correct=False, question_id=question_eleven.id)
+AnswerManager.create_answer(content="Egypt", is_correct=False, question_id=question_eleven.id)
 
 question_twelve = QuestionManager.create_question(
             content="What is the capital of Senegal?",

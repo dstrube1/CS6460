@@ -12,7 +12,6 @@ class GameEventManager:
                 question_id=question_id,
                 round_id=round_id,
                 session_id=session_id,
-
                 event_type=event_type,
                 event_data=event_data,
                 event_completed=event_completed,
